@@ -1,4 +1,3 @@
-import pygame
 # get row/col from position
 # - pos: position. e.g., a1, d2
 # - return value (tuple)
@@ -11,13 +10,6 @@ def pos2rc(pos):
             col = ord(pos[0]) - ord('a')
             row = ord(pos[1]) - ord('1')
     return row, col
-
-def rc2pos(r, c):
-    pos = ''
-    pos += chr(ord('a') + c)
-    pos += chr(ord("1") + r)
-    return pos
-
 
 class EChess():
     def __init__(self):
@@ -87,61 +79,19 @@ class EChess():
 
         return True
 
-pygame.init()
+# test code
+#chess = EChess()
+#chess.print()
 
-WIDTH, HEIGHT = 800, 800
-surface = pygame.display.set_mode([WIDTH, HEIGHT])
-WHITE = (255, 255, 255)
+#chess.move('e2', 'e4')
+#chess.print()
 
+#chess.move('e2', 'd1')
+#chess.print()
 
+#chess.move('e4', 'd1')
+#chess.print()
 
-class Board:
-    def __init__(self, width, height, surface):
-        self.surface = surface
-        self.width = width
-        self.height = height
+#chess.move('h2', 'h7')
+#chess.print()
 
-        self.square_width = self.width / 8
-        self.square_height = self.height / 8
-
-        self.square_color = [[1,0,1,0,1,0,1,0],
-                            [0,1,0,1,0,1,0,1],
-                            [1,0,1,0,1,0,1,0],
-                            [0,1,0,1,0,1,0,1],
-                            [1,0,1,0,1,0,1,0],
-                            [0,1,0,1,0,1,0,1],
-                            [1,0,1,0,1,0,1,0],
-                            [0,1,0,1,0,1,0,1]]
-
-        self.font = pygame.font.Font("freesansbold.ttf", 20)
-        
-        self.echess = EChess()
-
-    def draw(self):
-        # Draw the board itself
-        for row in range(8):
-            for col in range(8):
-                top_x = col * self.square_width
-                top_y = row * self.square_height
-                if self.square_color[row][col] == 0:
-                    color = (100,100,100) # black
-                else:
-                    color = (200,200,200) # white
-                pygame.draw.rect(self.surface, color, pygame.Rect(top_x, top_y, self.square_width, self.square_height))
-                
-
-                piece = self.echess.check_square(rc2pos(row, col))
-                text = self.font.render(piece, True, (200, 0, 0))
-                self.surface.blit(text, (top_x, top_y))
-
-
-        pygame.display.flip()
-
-board = Board(WIDTH, HEIGHT, surface)
-
-run = True
-while run:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-    board.draw()
