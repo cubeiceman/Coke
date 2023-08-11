@@ -122,7 +122,7 @@ class Board:
         for row in range(8):
             for col in range(8):
                 top_x = col * self.square_width
-                top_y = row * self.square_height
+                top_y = HEIGHT - ((row+1) * self.square_height)
                 if self.square_color[row][col] == 0:
                     color = (100,100,100) # black
                 else:
