@@ -18,6 +18,11 @@ def rc2pos(r, c):
     pos += chr(ord("1") + r)
     return pos
 
+def coord2rc(x, y, square_width, square_height):
+    r = 7 - int(y / square_height)
+    c = int(x / square_width)
+    return r, c
+
 
 class EChess():
     def __init__(self):
@@ -114,8 +119,20 @@ class Board:
                             [0,1,0,1,0,1,0,1]]
 
         self.font = pygame.font.Font("freesansbold.ttf", 20)
-        
         self.echess = EChess()
+
+        self.start_pos = None
+
+
+    def handle_click(self, x, y):
+        r, c = coord2rc(x, y, self.square_width, self.square_height)
+        pos = rc2pos(r, c)
+        if self.start_pos == None:
+            self.start_pos = pos
+        else:
+            self.echess.move(self.start_pos, pos)
+            self.start_pos = None
+
 
     def draw(self):
         # Draw the board itself
@@ -143,5 +160,8 @@ run = True
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            run = False
+            run = False 
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mx, my = pygame.mouse.get_pos()
+            board.handle_click(mx, my)
     board.draw()
