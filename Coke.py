@@ -1,4 +1,7 @@
 import pygame
+pygame.init()
+
+
 # get row/col from position
 # - pos: position. e.g., a1, d2
 # - return value (tuple)
@@ -23,6 +26,9 @@ def coord2rc(x, y, square_width, square_height):
     c = int(x / square_width)
     return r, c
 
+def get_image(piece):
+    image = pygame.image.load(".\\" + piece + ".png")
+    return image
 
 class EChess():
     def __init__(self):
@@ -92,7 +98,7 @@ class EChess():
 
         return True
 
-pygame.init()
+
 
 WIDTH, HEIGHT = 800, 800
 surface = pygame.display.set_mode([WIDTH, HEIGHT])
@@ -146,10 +152,12 @@ class Board:
                     color = (200,200,200) # white
                 pygame.draw.rect(self.surface, color, pygame.Rect(top_x, top_y, self.square_width, self.square_height))
                 
-
+                
                 piece = self.echess.check_square(rc2pos(row, col))
-                text = self.font.render(piece, True, (200, 0, 0))
-                self.surface.blit(text, (top_x, top_y))
+                if piece != "":
+                    self.surface.blit(get_image(piece), (top_x, top_y))
+                #text = self.font.render(piece, True, (200, 0, 0))
+                #self.surface.blit(text, (top_x, top_y))
 
 
         pygame.display.flip()
