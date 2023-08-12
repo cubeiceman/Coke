@@ -116,13 +116,13 @@ class Board:
         self.square_height = self.height / 8
 
         self.square_color = [[1,0,1,0,1,0,1,0],
-                            [0,1,0,1,0,1,0,1],
-                            [1,0,1,0,1,0,1,0],
-                            [0,1,0,1,0,1,0,1],
-                            [1,0,1,0,1,0,1,0],
-                            [0,1,0,1,0,1,0,1],
-                            [1,0,1,0,1,0,1,0],
-                            [0,1,0,1,0,1,0,1]]
+                             [0,1,0,1,0,1,0,1],
+                             [1,0,1,0,1,0,1,0],
+                             [0,1,0,1,0,1,0,1],
+                             [1,0,1,0,1,0,1,0],
+                             [0,1,0,1,0,1,0,1],
+                             [1,0,1,0,1,0,1,0],
+                             [0,1,0,1,0,1,0,1]]
 
         self.font = pygame.font.Font("freesansbold.ttf", 20)
         self.echess = EChess()
@@ -151,6 +151,10 @@ class Board:
                 else:
                     color = (200,200,200) # white
                 pygame.draw.rect(self.surface, color, pygame.Rect(top_x, top_y, self.square_width, self.square_height))
+                if self.start_pos != None:
+                    if pos2rc(self.start_pos) == (row, col):
+                        pygame.draw.rect(self.surface, (200, 200, 0), pygame.Rect(top_x, top_y, self.square_width, self.square_height))
+
                 
                 
                 piece = self.echess.check_square(rc2pos(row, col))
