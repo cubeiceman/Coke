@@ -114,15 +114,15 @@ class Board:
 
         self.square_width = self.width / 8
         self.square_height = self.height / 8
-
-        self.square_color = [[1,0,1,0,1,0,1,0],
-                             [0,1,0,1,0,1,0,1],
+        
+        self.square_color = [[0,1,0,1,0,1,0,1],
                              [1,0,1,0,1,0,1,0],
                              [0,1,0,1,0,1,0,1],
                              [1,0,1,0,1,0,1,0],
                              [0,1,0,1,0,1,0,1],
                              [1,0,1,0,1,0,1,0],
-                             [0,1,0,1,0,1,0,1]]
+                             [0,1,0,1,0,1,0,1],
+                             [1,0,1,0,1,0,1,0]]
 
         self.font = pygame.font.Font("freesansbold.ttf", 20)
         self.echess = EChess()
